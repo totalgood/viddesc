@@ -5,17 +5,23 @@ E_BADARGS=65
 
 if [ $# -lt $EXPECTED_ARGS ]
 then
-  echo "Usage: `basename $0` <username-MPIIMD> <password-MPIIMD> [parallelDownloads=8] [skipLines=40459]"
+  echo "Usage: `basename $0` <username-MPIIMD> <password-MPIIMD> [parallelDownloads=8] [firstLine=1] [numLines=1000000000]"
   exit $E_BADARGS
 fi
 usernameMD=$1
 passwordMD=$2
 parallelDownloads=$3
-skipLines=$4
+firstLine=$4
+lastLine=$5
+
+if [ $# -lt 5 ]
+then
+  numLines=1000000000  # 1 billion videos+descriptions
+fi
 
 if [ $# -lt 4 ]
 then
-  skipLines=21650
+  firstLine=1  # 21650
 fi
 
 if [ $# -lt 3 ]
@@ -50,16 +56,16 @@ wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/L
 filesToDownload="MPIIMD_downloadLinks.txt"
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
 cat $filesToDownload | wc
-cat $filesToDownload | tail -n +$skipLines | xargs "${FLAGS[@]}" wget -crnH -q --show-progress=on --cut-dirs=3 --user=$usernameMD --password=$passwordMD
+cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -q --show-progress=on --cut-dirs=3 --user=$usernameMD --password=$passwordMD
 
 # avi clips from M-VAD-test-aligned
 filesToDownloadT="MVADaligned_downloadLinks.txt"
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
 cat $filesToDownload | wc
-cat $filesToDownload | xargs "${FLAGS[@]}" wget -crnH -o $filesToDownload.log --cut-dirs=3 --user=$usernameMD --password=$passwordMD
+cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -o $filesToDownload.log --cut-dirs=3 --user=$usernameMD --password=$passwordMD
 
 # avi clips from Blind Test set
 filesToDownload="BlindTest_downloadLinks.txt"
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
 cat $filesToDownload | wc
-cat $filesToDownload | xargs "${FLAGS[@]}" wget -crnH -o $filesToDownload.log --cut-dirs=3 --user=$usernameMD --password=$passwordMD
+cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -o $filesToDownload.log --cut-dirs=3 --user=$usernameMD --password=$passwordMD
