@@ -12,7 +12,7 @@ usernameMD=$1
 passwordMD=$2
 parallelDownloads=$3
 firstLine=$4
-lastLine=$5
+numLines=$5
 
 if [ $# -lt 5 ]
 then
