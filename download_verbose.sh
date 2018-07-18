@@ -70,6 +70,7 @@ wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/L
 if [ $# -lt 6 ] || [ "$dataSet" -eq "0" ]
 then
   filesToDownload="MPIIMD_downloadLinks.txt"
+  wc $filesToDownload
   wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
   cat $filesToDownload | wc
   cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -q --show-progress=on --cut-dirs=3 --user=$usernameMD --password=$passwordMD
@@ -78,9 +79,9 @@ fi
 # avi clips from M-VAD-test-aligned
 if [ $# -lt 6 ] || [ "$dataSet" -eq "1" ]
 then
-  filesToDownloadT="MVADaligned_downloadLinks.txt"
+  filesToDownload="MVADaligned_downloadLinks.txt"
+  wc $filesToDownload
   wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
-  cat $filesToDownload | wc
   cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -q --show-progress=on --cut-dirs=3 --user=$usernameMD --password=$passwordMD
 fi
 
@@ -88,8 +89,8 @@ fi
 if [ $# -lt 6 ] || [ "$dataSet" -eq "2" ]
 then
   filesToDownload="BlindTest_downloadLinks.txt"
+  wc $filesToDownload
   wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
-  cat $filesToDownload | wc
   cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -q --show-progress=on --cut-dirs=3 --user=$usernameMD --password=$passwordMD
 fi
 
