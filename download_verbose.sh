@@ -49,19 +49,24 @@ fi
 
 ########## download annotations
 # Training set
+# redirects to: MPIIMD_downloadLinks.txt
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/LSMDC16_annos_training.csv --user=$usernameMD --password=$passwordMD
 
 # Validation set
+# redirects to: MVADaligned_downloadLinks.txt
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/LSMDC16_annos_val.csv --user=$usernameMD --password=$passwordMD
 
 # Public_Test set
+# ??? redirects to: BlindTest_downloadLinks.txt ???
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/LSMDC16_annos_test.csv --user=$usernameMD --password=$passwordMD
 
 # Blind_Test set
+# ??? redirects to: BlindTest_downloadLinks.txt ???
 wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/LSMDC16_annos_blindtest.csv --user=$usernameMD --password=$passwordMD
 
 ########## download videos
 # avi clips from MPII-MD
+
 if [ $# -lt 6 ] || [ "$dataSet" -eq "0" ]
 then
   filesToDownload="MPIIMD_downloadLinks.txt"
@@ -87,3 +92,4 @@ then
   cat $filesToDownload | wc
   cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -o $filesToDownload.log --cut-dirs=3 --user=$usernameMD --password=$passwordMD
 fi
+
