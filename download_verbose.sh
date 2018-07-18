@@ -5,7 +5,7 @@ E_BADARGS=65
 
 if [ $# -lt $EXPECTED_ARGS ]
 then
-  echo "Usage: `basename $0` <username-MPIIMD> <password-MPIIMD> [parallelDownloads=8] [firstLine=1] [numLines=1000000000]"
+  echo "Usage: `basename $0` <username>(required) <password>(required) <parallelDownloads>[8] <firstLine>[1] <numLines>[1000000000] <dataSet>[0]"
   exit $E_BADARGS
 fi
 usernameMD=$1
@@ -90,6 +90,6 @@ then
   filesToDownload="BlindTest_downloadLinks.txt"
   wget -c http://datasets.d2.mpi-inf.mpg.de/movieDescription/protected/lsmdc2016/"$filesToDownload" --user=$usernameMD --password=$passwordMD
   cat $filesToDownload | wc
-  cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -o $filesToDownload.log --cut-dirs=3 --user=$usernameMD --password=$passwordMD
+  cat $filesToDownload | tail -n +$firstLine | head -n $numLines | xargs "${FLAGS[@]}" wget -crnH -q --show-progress=on --cut-dirs=3 --user=$usernameMD --password=$passwordMD
 fi
 
