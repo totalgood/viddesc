@@ -1,3 +1,8 @@
+""" Train video description model using transfer learning from pytorch.org/models/resnet152-b121ed2d.pth 
+
+Only uses 8 of the 16 available cores and 4GB of the available 64GB RAM.
+"""
+
 import argparse
 import torch
 import torch.nn as nn
@@ -10,9 +15,12 @@ from model import EncoderCNN, DecoderRNN
 from torch.nn.utils.rnn import pack_padded_sequence
 from torchvision import transforms
 from constants import BASE_DIR
+from tqdm import tqdm
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+if device != 'cuda':
+    print('WARNING: using **C**PU cores!!!!!! Unable to load cuda device!')
 
 
 def main(args):
@@ -49,7 +57,7 @@ def main(args):
     # Train the models
     total_step = len(data_loader)
     for epoch in range(args.num_epochs):
-        for i, (images, captions, lengths) in enumerate(data_loader):
+        for i, (images, captions, lengths) in enumerate(tqdm(data_loader, total=total_step)):
 
             # Set mini-batch dataset
             images = images.to(device)
