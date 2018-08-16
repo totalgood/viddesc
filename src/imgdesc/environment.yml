@@ -1,0 +1,29 @@
+name: videnv
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - opencv=3.3.0
+  - redis-py>=2.10.6
+  - matplotlib=2.2.2
+  - pillow=4.3.0
+  - pyqt=5.6.0
+  - pandoc=2.1.2
+  - spacy=2.0.11
+  - swig=3.0.12
+  - nltk=3.2.5
+  - gensim=3.4.0
+  - python-levenshtein=0.12.0
+  - pytorch
+  - nltk
+  # may interfere with ipython's qt5
+  - pyqt=4.11.4
+  - qt=4.8.7
+  - boto3
+
+  - pip:
+    - pycocotools
+    - -r requirements.txt
+

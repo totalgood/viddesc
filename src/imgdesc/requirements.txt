@@ -1,0 +1,8 @@
+matplotlib
+nltk
+pycocotools
+numpy
+Pillow
+argparse
+pyqt=4.11.4
+qt=4.8.7
