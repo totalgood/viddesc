@@ -1,20 +1,4 @@
-Traceback (most recent call last):
-  File "train.py", line 7, in <module>
-    from data_loader import get_loader
-  File "/home/hobs/code/viddesc/src/imgdesc/data_loader.py", line 9, in <module>
-    from build_vocab import Vocabulary
-  File "/home/hobs/code/viddesc/src/imgdesc/build_vocab.py", line 5, in <module>
-    from pycocotools.coco import COCO
-ModuleNotFoundError: No module named 'pycocotools'
-hobs@gpu:~/code/viddesc/src/imgdesc$ pip install pycocotools
-Collecting pycocotools
-  Using cached https://files.pythonhosted.org/packages/96/84/9a07b1095fd8555ba3f3d519517c8743c2554a245f9476e5e39869f948d2/pycocotools-2.0.0.tar.gz
-Building wheels for collected packages: pycocotools
-  Running setup.py bdist_wheel for pycocotools ... done
-  Stored in directory: /home/hobs/.cache/pip/wheels/dc/e6/36/0e1ae88c868eb42d3f92181b1c9bbd0b217a7ec3da6bd62e55
-Successfully built pycocotools
-Installing collected packages: pycocotools
-Successfully installed pycocotools-2.0.0
+
 hobs@gpu:~/code/viddesc/src/imgdesc$ python train.py
 Namespace(batch_size=128, caption_path='/midata/imdesc/annotations/captions_train2014.json', crop_size=224, embed_size=256, hidden_size=512, image_di
 r='/midata/imdesc/resized2014', learning_rate=0.001, log_step=10, model_path='models/', num_epochs=5, num_layers=1, num_workers=2, save_step=1000, vo
