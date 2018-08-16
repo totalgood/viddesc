@@ -3,17 +3,19 @@ viddesc
 =======
 
 
-Add a short description here!
+Real-time video description chatbot for visual and cognitive assistance.
 
 
 Description
 ===========
 
-A longer description of your project goes here...
+Uses a PyTorch video description model trained on COCO, YouTube8M, and MPII Movie Description datasets.
+The video description model is based on the pytorch advanced tutorial on image description. 
+Uses [`nlpi`](http://github.com/totalgood/nlpia) for dialog management.
 
 
-Note
-====
+References
+==========
 
-This project has been set up using PyScaffold 3.0.3. For details and usage
-information on PyScaffold see http://pyscaffold.org/.
+* <a href="https://arxiv.org/pdf/1611.07810.pdf">"A dataset and exploration of models for understanding video data through fill-in-the-blank question-answering"</a> by Maharaj et al at <a href="mpi-inf.mpg.de">MPII</a>.
+* <a href="https://arxiv.org/pdf/1502.08029.pdf">"Describing Videos by Exploting Temporal Structure"</a> by Yao et al at the University of Montreal. 

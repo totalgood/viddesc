@@ -1,7 +1,13 @@
 # Add your pinned requirements so that they can be easily installed with:
 # pip install -r requirements.txt
 # Remember to also add them in setup.cfg but unpinned.
-# Example:
-# numpy==1.13.3
-# scipy==1.0
-
+matplotlib
+nltk
+pycocotools
+numpy
+Pillow
+argparse
+pyqt=4.11.4
+qt=4.8.7
+pyttorch
+torchvision
