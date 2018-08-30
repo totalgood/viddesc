@@ -3,10 +3,13 @@ import os
 
 import numpy as np
 import pandas as pd
+from tqdm import tqdm
 
 from keras.models import Model  # Sequential
 from keras.layers import Input, Dense, LSTM  # Dropout, Activation, Embedding
 from keras.utils.vis_utils import plot_model
+
+from nlpia.loaders import get_data
 
 
 def load_embeddings(path):
@@ -15,7 +18,7 @@ def load_embeddings(path):
         if '.' in movie_dir:
             continue
         movie_path = os.path.join(path, movie_dir)
-        for json_file in os.listdir(movie_path):
+        for json_file in tqdm(os.listdir(movie_path)):
             json_path = os.path.join(path, movie_dir, json_file)
             with open(json_path) as fin:
                 clip_js = json.load(fin)
@@ -81,6 +84,7 @@ def train_lstm():
 def load_data(data_dir=None):
     data_dir = data_dir or os.path.join(os.path.sep + 'midata', 'viddesc')
     descriptions = pd.read_table(os.path.join(data_dir, 'LSMDC16_annos_training.csv'), header=None)
-    descriptions.columns = 'filename t0 t1 t2 t3 description'.split()
+    descriptions.columns = 'filename start_2s end_2s start end description'.split()
     embeddings = load_embeddings(os.path.join(data_dir, 'embeddings'))
-    return embeddings
+    wv = get_data('word2vec')
+    return wv, descriptions, embeddings
