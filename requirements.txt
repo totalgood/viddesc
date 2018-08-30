@@ -7,7 +7,10 @@ pycocotools
 numpy
 Pillow
 argparse
-pyqt=4.11.4
-qt=4.8.7
-pyttorch
+# pyqt=4.11.4
+python_qt_binding
+# qt4
+# python-qt
+# qt=4.8.7
+torch
 torchvision
