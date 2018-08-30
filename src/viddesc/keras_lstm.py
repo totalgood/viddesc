@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 
 import numpy as np
 import pandas as pd
@@ -88,3 +89,8 @@ def load_data(data_dir=None):
     embeddings = load_embeddings(os.path.join(data_dir, 'embeddings'))
     wv = get_data('word2vec')
     return wv, descriptions, embeddings
+
+
+if __name__ == '__main__':
+    args = sys.argv[1:] if len(sys.argv) > 1 else []
+    wv, descriptions, embeddings = load_data(*args)
